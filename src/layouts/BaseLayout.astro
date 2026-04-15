@@ -2,7 +2,6 @@
 // src/layouts/BaseLayout.astro
 // The quiet frame around every room in the museum.
 
-// FIX 1: Import the global CSS here so Astro bundles and fingerprints it for production
 import '../styles/global.css';
 
 interface Props {
@@ -15,6 +14,9 @@ const { title, description = 'A personal museum.', ogImage } = Astro.props;
 const siteTitle = 'Postcards from Nyumbani';
 const fullTitle  = title === siteTitle ? title : `${title} — ${siteTitle}`;
 const path       = Astro.url.pathname;
+
+// THE ULTIMATE FIX: Safely strip the trailing slash off the base URL
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!DOCTYPE html>
@@ -43,18 +45,18 @@ const path       = Astro.url.pathname;
   <header class="site-header">
     <div class="site-header__inner">
 
-      <a href={import.meta.env.BASE_URL} class="site-header__wordmark" aria-label="Postcards from Nyumbani — home">
+      <a href={`${base}/`} class="site-header__wordmark" aria-label="Postcards from Nyumbani — home">
         <span class="site-header__title">Postcards from Nyumbani</span>
         <span class="site-header__subtitle">a personal museum</span>
       </a>
 
       <nav class="site-header__nav" aria-label="Museum rooms">
-        <a href={`${import.meta.env.BASE_URL}gallery/`}      class="nav-link" aria-current={path.includes('/gallery')      ? 'page' : undefined}>Gallery</a>
-        <a href={`${import.meta.env.BASE_URL}library/`}      class="nav-link" aria-current={path.includes('/library')      ? 'page' : undefined}>Library</a>
-        <a href={`${import.meta.env.BASE_URL}conservatory/`} class="nav-link" aria-current={path.includes('/conservatory') ? 'page' : undefined}>Conservatory</a>
-        <a href={`${import.meta.env.BASE_URL}archive/`}      class="nav-link" aria-current={path.includes('/archive')      ? 'page' : undefined}>Archive</a>
+        <a href={`${base}/gallery/`}      class="nav-link" aria-current={path.includes('/gallery')      ? 'page' : undefined}>Gallery</a>
+        <a href={`${base}/library/`}      class="nav-link" aria-current={path.includes('/library')      ? 'page' : undefined}>Library</a>
+        <a href={`${base}/conservatory/`} class="nav-link" aria-current={path.includes('/conservatory') ? 'page' : undefined}>Conservatory</a>
+        <a href={`${base}/archive/`}      class="nav-link" aria-current={path.includes('/archive')      ? 'page' : undefined}>Archive</a>
         <span class="site-header__divider" aria-hidden="true"></span>
-        <a href={`${import.meta.env.BASE_URL}about/`}        class="nav-link" aria-current={path.includes('/about')        ? 'page' : undefined}>About</a>
+        <a href={`${base}/about/`}        class="nav-link" aria-current={path.includes('/about')        ? 'page' : undefined}>About</a>
       </nav>
 
     </div>

@@ -35,9 +35,14 @@ const {
   medium,
 } = Astro.props;
 
+// THE FIX: Safely strip the trailing slash off the base URL
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const roomMeta   = ROOMS[room];
 const postmark   = formatPostmark(date);
-const href       = `${roomMeta.path}/${slug}`;
+
+// THE FIX: Construct the URL safely with the base and a trailing slash
+const href       = `${base}/${room}/${slug}/`;
 
 // Stamp colour map — CSS class suffix
 const stampClass = `stamp--${room}`;
@@ -50,7 +55,8 @@ const stampClass = `stamp--${room}`;
     <div class="postcard__image-wrap">
       {cover ? (
         <img
-          src={cover}
+          /* THE FIX: Prepend the base URL and safely strip any starting slash from the markdown cover path */
+          src={`${base}/${cover.replace(/^\//, '')}`}
           alt={title}
           class="postcard__image"
           loading="lazy"
@@ -58,7 +64,6 @@ const stampClass = `stamp--${room}`;
         />
       ) : (
         <div class="postcard__image-placeholder">
-          <!-- Decorative watermark circle when no image -->
           <div class="postmark-watermark" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
           <span class="postcard__room-initial">{roomMeta.label.split(' ').pop()?.charAt(0)}</span>
         </div>
