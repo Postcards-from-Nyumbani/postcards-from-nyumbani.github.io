@@ -5,10 +5,12 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   // GitHub Pages routing configuration
 // The absolute domain (dashes)
-  site: 'https://postcards-from-nyumbani.github.io',
+ site: 'https://postcards-from-nyumbani.github.io',
   
-  // The exact repository name (underscores)
-  base: '/postcards_from_nyumbani',
+  // This is the magic toggle!
+  // If building on GitHub, use the subfolder. If on your computer, use the root (/).
+  base: process.env.GITHUB_ACTIONS ? '/postcards_from_nyumbani' : '/',
+  
 
   integrations: [
     tailwind({
