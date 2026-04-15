@@ -19,7 +19,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          node-version: 20 # Ensures it uses a modern Node version for Astro v6
+          node-version: 22 # Ensures it uses a modern Node version for Astro v6
 
   deploy:
     needs: build
