@@ -1,0 +1,319 @@
+---
+// src/components/Postcard.astro
+// ─────────────────────────────────────────────────────────────
+// The Postcard — a physical card rendered in pixels.
+// Used in gallery and archive feeds. Each card evokes a real
+// postcard: image, date stamp, category mark, and a snippet.
+// ─────────────────────────────────────────────────────────────
+
+import { formatPostmark, ROOMS, type Room } from '../lib/collections';
+
+interface Props {
+  title:       string;
+  description: string;
+  date:        Date;
+  room:        Room;
+  slug:        string;
+  cover?:      string;
+  tags?:       string[];
+  // Room-specific optional extras
+  author?:     string;  // library
+  mood?:       string;  // archive
+  medium?:     string;  // gallery
+}
+
+const {
+  title,
+  description,
+  date,
+  room,
+  slug,
+  cover,
+  tags = [],
+  author,
+  mood,
+  medium,
+} = Astro.props;
+
+const roomMeta   = ROOMS[room];
+const postmark   = formatPostmark(date);
+const href       = `${roomMeta.path}/${slug}`;
+
+// Stamp colour map — CSS class suffix
+const stampClass = `stamp--${room}`;
+---
+
+<article class="postcard group" data-room={room}>
+  <a href={href} class="postcard__link" aria-label={`Read: ${title}`}>
+
+    {/* ── Top: Image / Cover ──────────────────────────────── */}
+    <div class="postcard__image-wrap">
+      {cover ? (
+        <img
+          src={cover}
+          alt={title}
+          class="postcard__image"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div class="postcard__image-placeholder">
+          <!-- Decorative watermark circle when no image -->
+          <div class="postmark-watermark" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+          <span class="postcard__room-initial">{roomMeta.label.split(' ').pop()?.charAt(0)}</span>
+        </div>
+      )}
+
+      {/* Postmark date overlay on image */}
+      <div class="postcard__date-badge">
+        <time datetime={date.toISOString()} class="postcard__date">
+          {postmark}
+        </time>
+      </div>
+    </div>
+
+    {/* ── Body: Text Content ──────────────────────────────── */}
+    <div class="postcard__body">
+
+      {/* Category Stamp */}
+      <div class="postcard__stamp-row">
+        <span class={`stamp ${stampClass}`}>
+          {roomMeta.label}
+        </span>
+        {medium && (
+          <span class="postcard__meta-pill">{medium}</span>
+        )}
+        {mood && (
+          <span class="postcard__meta-pill">#{mood}</span>
+        )}
+      </div>
+
+      {/* Title */}
+      <h2 class="postcard__title">{title}</h2>
+
+      {/* Author line (for Library cards) */}
+      {author && (
+        <p class="postcard__author">— {author}</p>
+      )}
+
+      {/* Snippet / Description */}
+      <p class="postcard__snippet">{description}</p>
+
+      {/* Tags */}
+      {tags.length > 0 && (
+        <div class="postcard__tags">
+          {tags.map(tag => (
+            <span class="postcard__tag">#{tag}</span>
+          ))}
+        </div>
+      )}
+
+      {/* Read more affordance */}
+      <div class="postcard__footer">
+        <span class="postcard__read-more">
+          Continue reading
+          <svg class="postcard__arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+
+    </div>
+  </a>
+</article>
+
+<style>
+  /* ── The Card Shell ─────────────────────────────────────── */
+  .postcard {
+    background-color: theme('colors.parchment');
+    border-radius: theme('borderRadius.postcard');
+    box-shadow: theme('boxShadow.card');
+    overflow: hidden;
+    position: relative;
+    transition:
+      transform    0.3s theme('transitionTimingFunction.museum'),
+      box-shadow   0.3s theme('transitionTimingFunction.museum');
+    break-inside: avoid;
+  }
+
+  .postcard:hover {
+    transform: translateY(-3px) rotate(0.25deg);
+    box-shadow: theme('boxShadow.card-hover');
+  }
+
+  .postcard__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ── Image Area ─────────────────────────────────────────── */
+  .postcard__image-wrap {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background-color: theme('colors.vellum');
+    border-bottom: 1px solid theme('colors.vellum');
+  }
+
+  .postcard__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s theme('transitionTimingFunction.museum');
+  }
+
+  .postcard:hover .postcard__image {
+    transform: scale(1.03);
+  }
+
+  /* Placeholder when no cover image */
+  .postcard__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: theme('colors.vellum');
+    position: relative;
+  }
+
+  .postcard__room-initial {
+    font-family: theme('fontFamily.serif');
+    font-size: 3.5rem;
+    color: theme('colors.fog');
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* Date badge — overlaid postmark */
+  .postcard__date-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(253, 252, 240, 0.88);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-top-left-radius: 2px;
+  }
+
+  .postcard__date {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: theme('colors.dust');
+    display: block;
+  }
+
+  /* ── Card Body ──────────────────────────────────────────── */
+  .postcard__body {
+    padding: 1.25rem 1.35rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex: 1;
+  }
+
+  .postcard__stamp-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Small metadata pill (medium, mood) */
+  .postcard__meta-pill {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.65rem;
+    color: theme('colors.dust');
+    letter-spacing: 0.06em;
+  }
+
+  /* Title */
+  .postcard__title {
+    font-family: theme('fontFamily.serif');
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: theme('colors.charcoal');
+    letter-spacing: -0.01em;
+    margin: 0;
+    /* Clamp to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Author (Library only) */
+  .postcard__author {
+    font-family: theme('fontFamily.serif');
+    font-style: italic;
+    font-size: 0.875rem;
+    color: theme('colors.sepia');
+    margin: 0;
+  }
+
+  /* Description snippet */
+  .postcard__snippet {
+    font-family: theme('fontFamily.serif');
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: theme('colors.sepia');
+    margin: 0;
+    /* Clamp to 3 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Tags */
+  .postcard__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.1rem;
+  }
+
+  .postcard__tag {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.68rem;
+    color: theme('colors.dust');
+    letter-spacing: 0.04em;
+  }
+
+  /* Footer read-more */
+  .postcard__footer {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid theme('colors.vellum');
+  }
+
+  .postcard__read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: theme('fontFamily.sans');
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: theme('colors.dust');
+    transition: color 0.2s ease;
+  }
+
+  .postcard:hover .postcard__read-more {
+    color: theme('colors.postmark');
+  }
+
+  .postcard__arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .postcard:hover .postcard__arrow {
+    transform: translateX(3px);
+  }
+</style>

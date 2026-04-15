@@ -1,11 +1,218 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+// The museum entrance — a curated feed from all rooms.
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Postcard from '../components/Postcard.astro';
+import { getAllPublished, ROOMS, type Room } from '../lib/collections';
+
+const posts = await getAllPublished();
+const rooms = Object.entries(ROOMS) as [Room, typeof ROOMS[Room]][];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Postcards from Nyumbani"
+  description="A personal museum. Art, books, music, and essays from Nairobi."
+>
+
+  <!-- ── Entrance Hall ───────────────────────────────────── -->
+  <section class="entrance">
+    <div class="entrance__inner">
+      <p class="entrance__label">Welcome to</p>
+      <h1 class="entrance__title">Postcards from<br />Nyumbani</h1>
+      <p class="entrance__tagline">
+        A personal museum. Dispatches from the quiet life:<br />
+        art made, books read, music felt, memories kept.
+      </p>
+      <div class="entrance__rule">
+        <hr class="postcard-rule" style="margin:0;flex:1" />
+        <span class="entrance__rule-stamp">est. {new Date().getFullYear()}</span>
+        <hr class="postcard-rule" style="margin:0;flex:1" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Museum Rooms ────────────────────────────────────── -->
+  <section class="rooms-nav">
+    <div class="rooms-nav__inner">
+      {rooms.map(([key, room]) => (
+        <a href={room.path} class="room-card" data-room={key}>
+          <span class={`stamp stamp--${key}`}>{room.label}</span>
+          <p class="room-card__desc">{room.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Recent Postcards ────────────────────────────────── -->
+  <section class="recent-section">
+    <div class="recent-section__inner">
+      <h2 class="section-heading">
+        <span>Recently Filed</span>
+      </h2>
+
+      {posts.length === 0 ? (
+        <p class="empty-state">The museum is being arranged. Check back soon.</p>
+      ) : (
+       <div class="postcards-grid">
+          {posts.slice(0, 6).map((post) => (
+            <Postcard
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              room={post.collection as Room}
+              slug={post.id}                 cover={post.data.cover}
+              tags={post.data.tags}
+              author={'author' in post.data ? post.data.author : undefined}
+              mood={'mood' in post.data ? post.data.mood : undefined}
+              medium={'medium' in post.data ? post.data.medium : undefined}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Entrance Hall */
+  .entrance {
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .entrance__inner {
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+
+  .entrance__label {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: theme('colors.dust');
+    margin-bottom: 0.75rem;
+  }
+
+  .entrance__title {
+    font-family: theme('fontFamily.serif');
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: theme('colors.charcoal');
+    letter-spacing: theme('letterSpacing.title');
+    margin-bottom: 1.25rem;
+  }
+
+  .entrance__tagline {
+    font-family: theme('fontFamily.serif');
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: theme('colors.sepia');
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  .entrance__rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .entrance__rule-stamp {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: theme('colors.dust');
+    white-space: nowrap;
+  }
+
+  /* Room Navigation Cards */
+  .rooms-nav {
+    padding: 0 2rem 4rem;
+  }
+
+  .rooms-nav__inner {
+    max-width: theme('maxWidth.museum');
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .room-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.25rem 1.5rem;
+    background-color: theme('colors.parchment');
+    border: 1px solid theme('colors.vellum');
+    border-radius: theme('borderRadius.postcard');
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .room-card:hover {
+    background-color: theme('colors.vellum');
+    transform: translateY(-2px);
+  }
+
+  .room-card__desc {
+    font-family: theme('fontFamily.serif');
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: theme('colors.sepia');
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* Recent Section */
+  .recent-section {
+    padding: 0 2rem;
+  }
+
+  .recent-section__inner {
+    max-width: theme('maxWidth.museum');
+    margin: 0 auto;
+  }
+
+  .section-heading {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: theme('colors.dust');
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: theme('colors.vellum');
+  }
+
+  .postcards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .empty-state {
+    font-family: theme('fontFamily.serif');
+    font-style: italic;
+    color: theme('colors.dust');
+    text-align: center;
+    padding: 4rem 0;
+  }
+</style>

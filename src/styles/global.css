@@ -1,0 +1,166 @@
+/* ═══════════════════════════════════════════════════════════════
+   Postcards from Nyumbani — Global Styles
+   Warm Minimalism: paper, ink, silence.
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --color-paper:    #FDFCF0;
+    --color-parchment:#F5F0DC;
+    --color-vellum:   #EDE8D0;
+    --color-ink:      #1C1A14;
+    --color-sepia:    #5C5240;
+    --color-postmark: #7A3B2E;
+  }
+
+  html {
+    background-color: theme('colors.paper');
+    color: theme('colors.ink');
+    font-family: theme('fontFamily.serif');
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: theme('colors.paper');
+    background-image: theme('backgroundImage.paper-texture');
+    min-height: 100vh;
+  }
+
+  /* Refined selection colour */
+  ::selection {
+    background-color: theme('colors.vellum');
+    color: theme('colors.ink');
+  }
+
+  /* Scrollbar — subtle, warm */
+  ::-webkit-scrollbar       { width: 6px; }
+  ::-webkit-scrollbar-track { background: theme('colors.parchment'); }
+  ::-webkit-scrollbar-thumb { background: theme('colors.fog'); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: theme('colors.dust'); }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: theme('fontFamily.serif');
+    color: theme('colors.charcoal');
+    letter-spacing: theme('letterSpacing.title');
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: theme('colors.vellum');
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+  }
+
+  a:hover {
+    text-decoration-color: theme('colors.postmark');
+  }
+
+  /* Focus ring — accessible but tasteful */
+  :focus-visible {
+    outline: 2px solid theme('colors.postmark');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ── Utility Components ─────────────────────────────────────── */
+@layer components {
+
+  /* Category Stamp — the signature postmark motif */
+  .stamp {
+    display: inline-block;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.65rem;
+    letter-spacing: theme('letterSpacing.stamp');
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1.5px solid currentColor;
+    border-radius: 2px;
+    line-height: 1.6;
+    user-select: none;
+  }
+
+  .stamp--gallery     { color: theme('colors.sienna'); }
+  .stamp--library     { color: theme('colors.ochre');  }
+  .stamp--conservatory{ color: theme('colors.sage');   }
+  .stamp--archive     { color: theme('colors.navy');   }
+
+  /* Decorative divider — like a postcard's printed rule */
+  .postcard-rule {
+    border: none;
+    border-top: 1px solid theme('colors.vellum');
+    margin: 2rem 0;
+  }
+
+  /* Subtle postmark circle — decorative watermark for cards */
+  .postmark-watermark {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 1.5px solid theme('colors.vellum');
+    opacity: 0.5;
+  }
+
+  /* Navigation link style */
+  .nav-link {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: theme('letterSpacing.wide');
+    text-transform: uppercase;
+    text-decoration: none;
+    color: theme('colors.sepia');
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link[aria-current="page"] {
+    color: theme('colors.ink');
+  }
+
+  .nav-link[aria-current="page"] {
+    border-bottom: 1.5px solid theme('colors.postmark');
+    padding-bottom: 1px;
+  }
+
+  /* Prose overrides — Garamond-tuned long-form reading */
+  .museum-prose {
+    @apply prose prose-lg max-w-reading;
+    --tw-prose-body:        theme('colors.ink');
+    --tw-prose-headings:    theme('colors.charcoal');
+    --tw-prose-lead:        theme('colors.sepia');
+    --tw-prose-links:       theme('colors.postmark');
+    --tw-prose-bold:        theme('colors.charcoal');
+    --tw-prose-counters:    theme('colors.dust');
+    --tw-prose-bullets:     theme('colors.vellum');
+    --tw-prose-hr:          theme('colors.vellum');
+    --tw-prose-quotes:      theme('colors.sepia');
+    --tw-prose-quote-borders: theme('colors.vellum');
+    --tw-prose-captions:    theme('colors.dust');
+    --tw-prose-code:        theme('colors.postmark');
+    --tw-prose-pre-bg:      theme('colors.parchment');
+    font-family: theme('fontFamily.serif');
+    line-height: 1.85;
+  }
+
+  /* Page entrance animation */
+  .fade-up {
+    animation: fadeUp 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}

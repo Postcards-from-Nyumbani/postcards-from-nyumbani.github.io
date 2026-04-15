@@ -1,0 +1,136 @@
+---
+// src/pages/about.astro
+// The museum placard by the entrance — who made this and why.
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="A note from the person who keeps this museum."
+>
+  <div class="about-page">
+
+    <!-- Decorative postmark circle -->
+    <div class="about-watermark" aria-hidden="true"></div>
+
+    <article class="about-content">
+
+      <header class="about-header">
+        <span class="stamp stamp--archive">Curator's Note</span>
+        <h1 class="about-title">About This Museum</h1>
+      </header>
+
+      <div class="museum-prose">
+
+        <p>
+          <em>Nyumbani</em> is a Swahili word. It means "home," but it also
+          means something closer to <em>at home</em> — a state of being, not just
+          a location. This museum is an attempt to build that state in a place
+          where things can be kept without pressure.
+        </p>
+
+        <p>
+          I built this after a long job hunt. Not as a portfolio — I already
+          have one of those — but as the opposite of one. A place where nothing
+          needs to perform. Where a photograph can exist because the light was
+          right, not because it demonstrates a skill. Where a book reflection
+          can trail off mid-thought.
+        </p>
+
+        <h2>The Rooms</h2>
+
+        <p>
+          The museum is organised into four rooms, each a different mode of
+          attention:
+        </p>
+
+        <ul>
+          <li>
+            <strong>The Gallery</strong> — photographs, sketches, and things
+            made with hands. Art does not need to be finished to live here.
+          </li>
+          <li>
+            <strong>The Library</strong> — books read, passages underlined,
+            thoughts that arrived while reading and needed somewhere to go.
+          </li>
+          <li>
+            <strong>The Conservatory</strong> — music listened to, guitar
+            practiced, the silence between notes that is also music.
+          </li>
+          <li>
+            <strong>The Archive</strong> — essays. On people, on feelings, on
+            the texture of living in Nairobi in your twenties.
+          </li>
+        </ul>
+
+        <h2>The Technology</h2>
+
+        <p>
+          Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+          and Tailwind CSS. Content lives in Markdown files, synced from
+          an Obsidian vault. Only posts with <code>status: "published"</code> in
+          their frontmatter make it to the site — everything else stays in the
+          notebook where first drafts belong.
+        </p>
+
+        <p>
+          No analytics. No comments. No newsletter. Just pages.
+        </p>
+
+        <hr />
+
+        <p class="about-closing">
+          If something here reaches you — a photograph, a sentence, a chord
+          progression — that is enough. You do not need to tell me.
+          But if you want to, you can.
+        </p>
+
+      </div>
+
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: theme('maxWidth.reading');
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+    position: relative;
+  }
+
+  /* Faint decorative circle — like a museum seal */
+  .about-watermark {
+    position: absolute;
+    top: 3rem;
+    right: -2rem;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid theme('colors.vellum');
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .about-content { position: relative; z-index: 1; }
+
+  .about-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .about-title {
+    font-family: theme('fontFamily.serif');
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 400;
+    color: theme('colors.charcoal');
+    letter-spacing: theme('letterSpacing.title');
+  }
+
+  .about-closing {
+    font-style: italic;
+    color: theme('colors.sepia');
+  }
+</style>

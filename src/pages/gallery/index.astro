@@ -1,0 +1,48 @@
+---
+// src/pages/gallery/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Postcard from '../../components/Postcard.astro';
+import { getPublished, ROOMS } from '../../lib/collections';
+
+const posts = await getPublished('gallery');
+const room  = ROOMS.gallery;
+---
+
+<BaseLayout title={room.label} description={room.description}>
+  <div class="room-page">
+
+    <header class="room-header">
+      <span class="stamp stamp--gallery">{room.label}</span>
+      <h1 class="room-header__title">{room.label}</h1>
+      <p class="room-header__desc">{room.description}</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="room-empty">The gallery walls are being hung. Come back soon.</p>
+    ) : (
+      <div class="room-grid">
+        {posts.map(post => (
+          <Postcard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            room={post.collection as Room}
+            slug={post.id}
+            cover={post.data.cover}
+            tags={post.data.tags}
+            medium={'medium' in post.data ? post.data.medium : undefined}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .room-page   { max-width: theme('maxWidth.museum'); margin: 0 auto; padding: 4rem 2rem; }
+  .room-header { margin-bottom: 3rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .room-header__title { font-family: theme('fontFamily.serif'); font-size: clamp(2rem,4vw,3rem); font-weight: 400; color: theme('colors.charcoal'); letter-spacing: theme('letterSpacing.title'); }
+  .room-header__desc  { font-family: theme('fontFamily.serif'); font-style: italic; font-size: 1.05rem; color: theme('colors.sepia'); }
+  .room-grid   { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .room-empty  { font-family: theme('fontFamily.serif'); font-style: italic; color: theme('colors.dust'); text-align: center; padding: 4rem 0; }
+</style>

@@ -1,0 +1,63 @@
+---
+// src/pages/conservatory/[id].astro
+import '../../styles/global.css';
+import { getCollection, render } from 'astro:content';
+import { formatPostmark, ROOMS } from '../../lib/collections';
+
+export async function getStaticPaths() {
+  const conservatoryEntries = await getCollection('conservatory', ({ data }) => data.status === 'published');
+  return conservatoryEntries.map(post => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const roomDetails = ROOMS['conservatory'];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{post.data.title} | {roomDetails.label}</title>
+  </head>
+  
+  <body class="bg-stone-100 text-stone-900 min-h-screen p-8 md:p-16">
+    <div class="max-w-3xl mx-auto">
+      
+      <a href="/" class="text-xs uppercase tracking-widest text-stone-500 hover:text-stone-900 transition-colors mb-12 inline-block">
+        &larr; Back to the Main Hall
+      </a>
+
+      <article>
+        <header class="mb-12 border-b border-stone-300 pb-8">
+          <h1 class="text-4xl md:text-5xl font-serif text-stone-800 mb-4">{post.data.title}</h1>
+          
+          <div class="flex items-center gap-3 text-xs tracking-widest uppercase">
+            <time class="text-stone-500">{formatPostmark(post.data.date)}</time>
+            <span class="text-stone-300">|</span>
+            <span style={`color: ${roomDetails.colour}`}>{roomDetails.label}</span>
+          </div>
+          
+          {(post.data.artist || post.data.album || post.data.instrument || post.data.key) && (
+            <div class="mt-6 text-sm text-stone-500 italic flex flex-col gap-1">
+              {post.data.artist && <span>Artist: {post.data.artist}</span>}
+              {post.data.album && <span>Album: {post.data.album}</span>}
+              {(post.data.instrument || post.data.key) && (
+                <span>
+                  {post.data.instrument && post.data.instrument}
+                  {post.data.instrument && post.data.key && ' | '}
+                  {post.data.key && `Key of ${post.data.key}`}
+                </span>
+              )}
+            </div>
+          )}
+        </header>
+
+        <div class="prose prose-stone prose-lg md:prose-xl max-w-none prose-headings:font-serif prose-a:text-sienna hover:prose-a:text-stone-900">
+          <Content />
+        </div>
+      </article>
+
+    </div>
+  </body>
+</html>

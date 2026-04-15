@@ -1,0 +1,178 @@
+---
+// src/layouts/BaseLayout.astro
+// The quiet frame around every room in the museum.
+
+interface Props {
+  title:       string;
+  description?: string;
+  ogImage?:    string;
+}
+
+const { title, description = 'A personal museum.', ogImage } = Astro.props;
+const siteTitle = 'Postcards from Nyumbani';
+const fullTitle  = title === siteTitle ? title : `${title} — ${siteTitle}`;
+const path       = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type"        content="website" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <title>{fullTitle}</title>
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="/src/styles/global.css" />
+
+  <!-- Preconnect for Google Fonts (already imported in CSS, belt-and-braces) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- ── Site Header ──────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="site-header__inner">
+
+      <!-- Wordmark -->
+      <a href="/" class="site-header__wordmark" aria-label="Postcards from Nyumbani — home">
+        <span class="site-header__title">Postcards from Nyumbani</span>
+        <span class="site-header__subtitle">a personal museum</span>
+      </a>
+
+      <!-- Navigation: Museum Rooms -->
+      <nav class="site-header__nav" aria-label="Museum rooms">
+        <a href="/gallery"      class="nav-link" aria-current={path.startsWith('/gallery')      ? 'page' : undefined}>Gallery</a>
+        <a href="/library"      class="nav-link" aria-current={path.startsWith('/library')      ? 'page' : undefined}>Library</a>
+        <a href="/conservatory" class="nav-link" aria-current={path.startsWith('/conservatory') ? 'page' : undefined}>Conservatory</a>
+        <a href="/archive"      class="nav-link" aria-current={path.startsWith('/archive')      ? 'page' : undefined}>Archive</a>
+        <span class="site-header__divider" aria-hidden="true"></span>
+        <a href="/about"        class="nav-link" aria-current={path === '/about'                ? 'page' : undefined}>About</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ── Page Content ─────────────────────────────────────── -->
+  <main class="flex-1 fade-up">
+    <slot />
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p class="site-footer__note">
+        Dispatched from Nairobi &middot; Written in transit &middot; Kept quietly here.
+      </p>
+      <p class="site-footer__year">
+        <time>{new Date().getFullYear()}</time>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+<style>
+  /* ── Header ─────────────────────────────────────────────── */
+  .site-header {
+    border-bottom: 1px solid theme('colors.vellum');
+    background-color: theme('colors.paper');
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+    background-color: rgba(253,252,240,0.92);
+  }
+
+  .site-header__inner {
+    max-width: theme('maxWidth.museum');
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .site-header__wordmark {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .site-header__title {
+    font-family: theme('fontFamily.serif');
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: theme('colors.charcoal');
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .site-header__subtitle {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: theme('colors.dust');
+  }
+
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .site-header__divider {
+    display: block;
+    width: 1px;
+    height: 14px;
+    background-color: theme('colors.vellum');
+  }
+
+  /* ── Footer ─────────────────────────────────────────────── */
+  .site-footer {
+    border-top: 1px solid theme('colors.vellum');
+    margin-top: 6rem;
+    padding: 2.5rem 2rem;
+  }
+
+  .site-footer__inner {
+    max-width: theme('maxWidth.museum');
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .site-footer__note {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: theme('colors.dust');
+    text-transform: uppercase;
+  }
+
+  .site-footer__year {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.75rem;
+    color: theme('colors.dust');
+  }
+
+  /* ── Responsive ─────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .site-header__inner { flex-direction: column; gap: 1rem; }
+    .site-header__nav   { gap: 1.25rem; flex-wrap: wrap; }
+    .site-footer__inner { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
