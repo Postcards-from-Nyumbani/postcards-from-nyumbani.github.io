@@ -159,7 +159,26 @@ const hasImage = !!cover;
   .postcard:hover .postcard__image {
     transform: scale(1.03);
   }
+/* Specific styling for pure text cards */
+.postcard--text-only {
+  border-top: 4px solid var(--room-color, theme('colors.postmark'));
+  position: relative;
+}
 
+/* Add a faint watermark to the background of text-only cards */
+.postcard--text-only::before {
+  content: attr(data-room);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: theme('fontFamily.serif');
+  font-size: 5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  opacity: 0.03; /* Extremely faint */
+  pointer-events: none;
+  line-height: 1;
+}
   .postcard__date-badge {
     position: absolute;
     bottom: 0;

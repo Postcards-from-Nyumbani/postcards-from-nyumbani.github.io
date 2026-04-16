@@ -26,7 +26,7 @@ const gallery = defineCollection({
 
 // ── The Library ───────────────────────────
 const library = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/library" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/Nyumbani/library" }),
   schema: ({ image }) => getBaseSchema({ image }).extend({
     author:     z.string(),
     year:       z.number().optional(),
@@ -37,7 +37,7 @@ const library = defineCollection({
 
 // ── The Conservatory ────────────────────────
 const conservatory = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/conservatory" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/Nyumbani/conservatory" }),
   schema: ({ image }) => getBaseSchema({ image }).extend({
     artist:     z.string().optional(),
     album:      z.string().optional(),
@@ -48,7 +48,7 @@ const conservatory = defineCollection({
 
 // ── The Archive ────────────────────────────────
 const archive = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/archive" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/Nyumbani/archive" }),
   schema: ({ image }) => getBaseSchema({ image }).extend({
     mood:       z.string().optional(), 
     dedication: z.string().optional(), 

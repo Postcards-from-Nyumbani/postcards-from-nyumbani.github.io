@@ -13,12 +13,22 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "gallery/sketchbook-001.md",
+                "file": "archive/stories/coffee-date.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "sketchbook-001"
+              "title": "coffee-date"
             }
           }
         ]
@@ -94,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "gallery/sketchbook-001.md",
+                "file": "conservatory/fingerstyle-d-minor.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +114,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for sketchbook-001"
+              "title": "Backlinks for fingerstyle-d-minor"
             }
           },
           {
@@ -113,12 +123,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "gallery/sketchbook-001.md",
+                "file": "conservatory/fingerstyle-d-minor.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from sketchbook-001"
+              "title": "Outgoing links from fingerstyle-d-minor"
             }
           },
           {
@@ -156,13 +166,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "gallery/sketchbook-001.md",
+                "file": "conservatory/fingerstyle-d-minor.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of sketchbook-001"
+              "title": "Outline of fingerstyle-d-minor"
             }
           }
         ]
@@ -184,5 +194,23 @@
     }
   },
   "active": "8019767dedbb6972",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "images/infatuations.jpg",
+    "images/love_ain't_a_chore.jpg",
+    "images/feiy.jpg",
+    "images/wabeiana.jpg",
+    "images/wab3iana.jpg",
+    "images/ben-scott-CwWCuaTp21o-unsplash.jpg",
+    "archive/poetry/WAB3IANA.md",
+    "images/coffee_date.jpg",
+    "archive/stories/coffee-date.md",
+    "archive/stories/love-is-not-a-chore.md",
+    "archive/stories/of-infatuations-and-detachments.md",
+    "archive/poetry/fe3y-take-me-back-to-2017.md",
+    "gallery/sketchbook-001.md",
+    "archive/stories",
+    "archive/poetry",
+    "conservatory/fingerstyle-d-minor.md",
+    "archive/people-who-taught-me.md"
+  ]
 }

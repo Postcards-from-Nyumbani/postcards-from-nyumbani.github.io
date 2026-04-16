@@ -3,7 +3,7 @@ title: "First Sketchbook"
 description: "Graphite and ink studies. A collection of early attempts, quiet observations, and learning to see."
 date: 2026-04-16
 status: published
-cover: ../images/sketchbook_001.jpg
+cover: ../images/1000106630.jpg.jpeg
 tags: [sketchbook, graphite, ink, drawing]
 medium: "Graphite & Pen on Paper"
 ---
@@ -55,7 +55,6 @@ These pages are a mix of quick observational sketches, quiet afternoons, studies
 ![Sketch](../images/1000416641.jpg.jpeg)
 
 ![Sketch](../images/1000416642.jpg.jpeg)
-![Sketch](../images/1000416643.jpg.jpeg)
 ![Sketch](../images/1000416644.jpg.jpeg)
 ![Sketch](../images/1000416674.jpg.jpeg)
 ![Sketch](../images/1000416677.jpg.jpeg)

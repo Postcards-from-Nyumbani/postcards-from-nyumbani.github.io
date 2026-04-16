@@ -1,0 +1,29 @@
+---
+title: "Of Infatuations and Detachments"
+description: "A deep dive into past connections, the logic of the heart, and the fear of the chase."
+date: 2023-11-13
+status: published
+cover: ../../images/infatuations.jpg
+tags: [prose, reflection, relationships]
+mood: "Introspective"
+dedication: To all my lovers
+---
+I haven’t written in a while, a semester and a half if I’m correct. It just wasn’t in me, or rather, things were just not resonating with me. So, I opted to search for my voice since ‘T’ was starting to sound a lot like ‘G’.
+
+Back when I had my whole life ahead of me when the future was appealing with something to live for, I had a friend. Let’s call her ‘E’. E was a tad bit taller than me, a poet, and would always gaze at me like I meant the world to her. I loved it. She once approached me with a serious case of writer’s block, and I referred her to a Ted talk by Sarah Kay: “Poetry is like pooping: If the poem is inside you, it has to come out.” We had a good laugh, and I proceeded to share my philosophy on how I think creatives should be selfish. Their art should first cater to their needs and not the consumers. She thought it was a BS take, and we agreed to disagree. You see, E was saved, and the holy book advocates we should share our talents, so I get where she was coming from. She was bold, reasonable, and had a melodic English accent that would come to full effect when performing her spoken word or when angry. I often miss her, but we’re no longer in touch.
+
+I’ve struggled with finding love at my big age, and being reserved in my teens didn’t present much of an advantage. So, I’ve missed out on that young, stupid love, which might have set a good foundation for me. Maybe I’d have turned out a hopeless romantic, a Casanova, or some pimp. But here I am, the guy who engages logic in matters of the heart, which is pretty messed up if you ask me. It takes the fun out of love; it’s like having sugar-free gum. You know it’s good for you, but it just ain’t it. What I’ve come to realize is love takes lots of guts, and maybe I’m not being logical; I’m just afraid.
+
+A thought crossed my mind earlier this week about my first love, ‘M’. She had the prettiest shade of melanin and gorgeous eyes. I used to religiously wink at her daily since a teacher once told us that was a gesture of love. She must have thought I was a creep. I still reminisce about the day my classmates claimed we were secretly in love. I refuted the claims but was delighted at heart—a bitch move if you ask me. I now know better.
+
+Then came ‘I.M.’, a babe of dignified standards. Two things captured my heart on that chilly September: the beauty Nakuru exudes, and of course, her. To say I was lovestruck would be downplaying the situation because I swear, I could have done anything for her. Quite an unpleasant situation now that I’m thinking about it, but a nigga was in love, the saddest bit being I never spoke to her, never said hi. So here I am, writing about a person I barely know, but that’s the beauty of it; she’s everything I’d want her to be.
+
+And now there’s ‘S’. I met her last semester and thought I’d bagged her, but I must have run out of luck since we are not in touch. I occasionally check her profile picture, and I must admit she’s pretty AF, but I’m not about the chase. I saw her a few weeks ago; we locked eyes, and I mourned for a future I might have missed.
+
+Then came ‘T,’ who I’ve written about before. I called her sometime back; she still got that stern voice that would come out whenever she was arguing. The call was short, but something about her tone, like she expected me to say more. I’d later smoke a blunt, and in a moment of epiphany, my alter ego deduced that that was the saddest and dumbest move ever. You can’t disappear for three years, then call out of the blue and expect things to be just as they were. We’re not in touch, but she helped me conclude that I tend to dwell in the past whenever life serves me its blows. A habit I acknowledge since I’m here writing about my past, which begs the question, would I be reminiscing about them had life been a little kinder to me?
+
+My troubles must have started this year when I reconnected with ‘W.’ She sounded happy to hear from me, and as luck would have it, we’d catch up over the holidays. A lot had changed; we were bolder. Perhaps the thing I regret most is leading her on when I knew it was going nowhere. I was just there for the nasties, and she wanted a relationship. As if by fate, she’d later sit me down after a long and shitty weekend courtesy of her and say, “If it’s sex you’re looking for, then I’m not the one.” The revelation was intriguing, and I let out a sigh of relief. I sometimes miss her, or rather the attention, which is quite selfish of me. We are no longer in touch; it’s only fair she gets the best.
+
+Then there was ‘K,’ with whom plenty was left unsaid. I don’t miss her, neither do I miss the memories. K taught me a lot, which always leaves a bad taste in my mouth whenever I think of it. Like on communication, you can communicate all you want, but at the end of the day, people will move how they want to. We are almost always aware when there’s no love, but half the time, we just don’t want to face the truth. On sacrifices, when the only way she can feel loved is through material things, no amount of self-sacrifice and time will be noticed. On love, it’s hard work. Love doesn’t just happen; it’s very intentional and vulnerable, almost brittle. She single-handedly shaped my whole view on relationships, and to be honest, I hate this perspective, but it’s the reality.
+
+And then there’s me, who has learned that hearts are not stones. What was once engraved on them fades away. Life’s too short for me to live in the past. Nobody knows what tomorrow holds, but it would give me absolute joy knowing I lived, laughed, and loved and while at it, gave it my all.
