@@ -17,8 +17,7 @@ const getBaseSchema = ({ image }: { image: any }) => z.object({
 
 // ── The Gallery ────────────────────────────────
 const gallery = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/gallery" }),
-  // Pass the image helper into the base schema
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/Nyumbani/gallery" }), // Added /Nyumbani/
   schema: ({ image }) => getBaseSchema({ image }).extend({
     medium:     z.string().optional(),
     dimensions: z.string().optional(), 
