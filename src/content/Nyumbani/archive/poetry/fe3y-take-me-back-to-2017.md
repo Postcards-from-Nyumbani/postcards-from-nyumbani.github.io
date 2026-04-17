@@ -1,10 +1,16 @@
 ---
 title: "FE3Y: [take me back to 2017]"
+
 description: "A sentimental gaze back at a moment of perceived perfection and the dawn of an ever after."
+
 date: 2022-05-30
+
 status: published
+
 cover: ../../images/feiy.jpg
+
 tags: [poetry, nostalgia, romance]
+
 mood: "Sentimental"
 ---
 

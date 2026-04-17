@@ -1,10 +1,16 @@
 ---
 title: "WAB3IANA: [malevolent]"
+
 description: "A raw, intense reflection on a connection turned tenuous, exploring the surge of vile love."
+
 date: 2022-05-30
+
 status: published
+
 cover: ../../images/wabeiana.jpg
+
 tags: [poetry, relationships, intense]
+
 mood: "Malevolent"
 ---
 <div class="poetry-center">
